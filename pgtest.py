@@ -1,43 +1,40 @@
-# import the pygame module
 import pygame
-
-# import pygame.locals for easier access to key coordinates
 from pygame.locals import *
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
-        self.surf = pygame.Surface((75, 25))
+        self.surf = pygame.Surface((25, 25))
         self.surf.fill((255, 255, 255))
         self.rect = self.surf.get_rect()
 
-# initialize pygame
+    def update(self, pressed_keys):
+        if pressed_keys[K_UP]:
+            self.rect.move_ip(0, -5)
+        if pressed_keys[K_DOWN]:
+            self.rect.move_ip(0, 5)
+        if pressed_keys[K_LEFT]:
+            self.rect.move_ip(-5, 0)
+        if pressed_keys[K_RIGHT]:
+            self.rect.move_ip(5, 0)
+
 pygame.init()
-
-# create the screen object
-# here we pass it a size of 800x600
 screen = pygame.display.set_mode((800, 600))
-
 player = Player()
-
-# Variable to keep our main loop running
 running = True
 
-# Our main loop!
 while running:
-# for loop through the event queue
     for event in pygame.event.get():
-# Check for KEYDOWN event; KEYDOWN is a constant defined in pygame.locals, which we imported earlier
         if event.type == KEYDOWN:
-# If the Esc key has been pressed set running to false to exit the main loop
             if event.key == K_ESCAPE:
                 running = False
-# Check for QUIT event; if QUIT, set running to false
         elif event.type == QUIT:
-                running = False
+            running = False
+    pressed_keys = pygame.key.get_pressed()
+
+    player.update(pressed_keys)
+
+    screen.blit(player.surf, player.rect)
     
-    # Draw the player to the screen
-    screen.blit(player.surf, (400, 300))
-    
-    # Update the display
     pygame.display.flip()
+    
