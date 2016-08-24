@@ -19,3 +19,10 @@ while running:
        # Check for QUIT event; if QUIT, set running to false
        elif event.type == QUIT:
            running = False
+
+# Create the surface and pass in a tuple with its length and width
+surf = pygame.Surface((50, 50))
+
+# Give the surface a color to differentiate it from the background
+surf.fill((255, 255, 255))
+rect = surf.get_rect()
