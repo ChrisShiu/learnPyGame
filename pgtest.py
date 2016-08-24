@@ -12,6 +12,19 @@ while running:
    # for loop through the event queue
    for event in pygame.event.get():
        # Check for KEYDOWN event; KEYDOWN is a constant defined in pygame.locals, which we imported earlier
+       
+
+       # Create the surface and pass in a tuple with its length and width
+       surf = pygame.Surface((50, 50))
+
+       # Give the surface a color to differentiate it from the background
+       surf.fill((255, 255, 255))
+       rect = surf.get_rect()
+
+       # This line says "Draw surf onto screen at coordinates x:400, y:300"
+       screen.blit(surf, (400, 300))
+       pygame.display.flip()
+
        if event.type == KEYDOWN:
            # If the Esc key has been pressed set running to false to exit the main loop
            if event.key == K_ESCAPE:
@@ -20,9 +33,3 @@ while running:
        elif event.type == QUIT:
            running = False
 
-# Create the surface and pass in a tuple with its length and width
-surf = pygame.Surface((50, 50))
-
-# Give the surface a color to differentiate it from the background
-surf.fill((255, 255, 255))
-rect = surf.get_rect()
